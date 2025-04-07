@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="ie.setu.Homefit" />
+                  <option name="mobileSdkAppId" value="1:530583143817:android:d3138855ad86137e2b0d58" />
+                  <option name="projectId" value="homefit-ab1d3" />
+                  <option name="projectNumber" value="530583143817" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

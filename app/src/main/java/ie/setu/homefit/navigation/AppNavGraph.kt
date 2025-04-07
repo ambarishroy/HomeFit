@@ -9,9 +9,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ie.setu.homefit.ui.screens.login.LoginScreen
 import ie.setu.homefit.ui.screens.register.RegisterScreen
-import ie.setu.homefit.ui.screens.home.HomeScreen
-import ie.setu.homefit.ui.screens.exercise.DailyExerciseScreen
-import ie.setu.homefit.ui.screens.profile.ProfileScreen
+//import ie.setu.homefit.ui.screens.home.HomeScreen
+//import ie.setu.homefit.ui.screens.exercise.DailyExerciseScreen
+//import ie.setu.homefit.ui.screens.profile.ProfileScreen
 
 @Composable
 fun NavHostProvider(
@@ -39,15 +39,15 @@ fun NavHostProvider(
                  onRegister = { navController.popBackStack() }
              )
          }
-         composable(route = Home.route) {
-             //call our 'Home' Screen Here
-             HomeScreen(modifier = modifier)
-         }
-        composable(Screen.Exercise.route) {
-            DailyExerciseScreen(navController)
-        }
-        composable(Screen.Profile.route) {
-            ProfileScreen(navController)
-        }
+//         composable(route = Home.route) {
+//             //call our 'Home' Screen Here
+//             HomeScreen(modifier = modifier)
+//         }
+//        composable(Screen.Exercise.route) {
+//            DailyExerciseScreen(navController)
+//        }
+//        composable(Screen.Profile.route) {
+//            ProfileScreen(navController)
+//        }
     }
 }
