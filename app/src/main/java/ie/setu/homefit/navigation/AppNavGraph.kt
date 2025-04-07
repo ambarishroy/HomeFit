@@ -19,7 +19,7 @@ fun NavHostProvider(
     navController: NavHostController,
     startDestination: AppDestination,
     paddingValues: PaddingValues,
-    permissions: Boolean
+    //permissions: Boolean
 ){
     NavHost(
         navController = navController,
