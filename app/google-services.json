@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "530583143817",
+    "project_id": "homefit-ab1d3",
+    "storage_bucket": "homefit-ab1d3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530583143817:android:d3138855ad86137e2b0d58",
+        "android_client_info": {
+          "package_name": "ie.setu.Homefit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuyxYkCNB07oq86UwanO8IkjMZFu7dAaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530583143817:android:fadf520a9e7d08df2b0d58",
+        "android_client_info": {
+          "package_name": "ie.setu.homefit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuyxYkCNB07oq86UwanO8IkjMZFu7dAaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
