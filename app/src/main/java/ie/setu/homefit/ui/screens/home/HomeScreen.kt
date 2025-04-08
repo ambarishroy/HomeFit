@@ -2,6 +2,7 @@ package ie.setu.homefit.ui.screens.home
 
 import android.Manifest
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -16,7 +17,6 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import ie.setu.homefit.navigation.Login
-import ie.setu.homefit.navigation.NavHostProvider
 //import ie.setu.homefit.navigation.Report
 import ie.setu.homefit.navigation.allDestinations
 import ie.setu.homefit.navigation.bottomAppBarDestinations
@@ -24,7 +24,6 @@ import ie.setu.homefit.navigation.userSignedOutDestinations
 import ie.setu.homefit.ui.components.general.BottomAppBarProvider
 import ie.setu.homefit.ui.components.general.TopAppBarProvider
 import ie.setu.homefit.ui.theme.HomeFitTheme
-import ie.setu.homefit.navigation.allDestinations
 import timber.log.Timber
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -80,14 +79,9 @@ fun HomeScreen(modifier: Modifier = Modifier,
         ) { navController.navigateUp() }
         },
         content = { paddingValues ->
-            NavHostProvider(
-                modifier = modifier,
-                navController = navController,
-                startDestination = startScreen,
-                paddingValues = paddingValues,
-//                permissions = mapViewModel
-//                    .hasPermissions
-//                    .collectAsState().value
+            androidx.compose.material3.Text(
+                text = "Welcome to HomeFit!",
+                modifier = Modifier.padding(paddingValues)
             )
         },
         bottomBar = {
@@ -99,7 +93,15 @@ fun HomeScreen(modifier: Modifier = Modifier,
         }
     )
 }
-
+@Composable
+fun HomeScreenWrapper() {
+    val viewModel: HomeViewModel = hiltViewModel()
+    val navController = rememberNavController()
+    HomeScreen(
+        homeViewModel = viewModel,
+        navController = navController
+    )
+}
 @Preview(showBackground = true)
 @Composable
 fun MyAppPreview() {
