@@ -22,13 +22,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            HomeFitApp()
+            HomeFitAppUI()
         }
     }
 }
 
 @Composable
-fun HomeFitApp() {
+fun HomeFitAppUI() {
     HomeFitTheme {
         val navController = rememberNavController()
         AppNavGraph(navController = navController)
