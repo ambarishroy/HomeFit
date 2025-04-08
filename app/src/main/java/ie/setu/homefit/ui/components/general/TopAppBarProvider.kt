@@ -105,7 +105,7 @@ fun TopAppBarPreview() {
             navController = rememberNavController(),
             About,
             true,
-            email = "dave@gmail.com",
+            email = "roy@gmail.com",
             name = "userName!!"
         )
     }
