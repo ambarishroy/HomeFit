@@ -39,10 +39,11 @@ fun AppNavGraph(
             RegisterScreen(
                 navController = navController,
                 onRegister = {
-                    navController.navigate(Home.route) {
+                    navController.navigate(Profile.route) {
                         popUpTo(Register.route) { inclusive = true }
                     }
                 }
+
             )
         }
 

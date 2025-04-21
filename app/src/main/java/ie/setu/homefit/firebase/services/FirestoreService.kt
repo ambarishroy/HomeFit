@@ -2,6 +2,7 @@ package ie.setu.homefit.firebase.services
 
 import android.net.Uri
 import ie.setu.homefit.data.model.HomeFitModel
+import ie.setu.homefit.data.model.UserProfile
 import kotlinx.coroutines.flow.Flow
 
 typealias Fit = HomeFitModel
@@ -15,4 +16,6 @@ interface FirestoreService {
     suspend fun update(email: String, donation: Fit)
     suspend fun delete(email: String, donationId: String)
     suspend fun updatePhotoUris(email: String, uri: Uri)
+    suspend fun saveUserProfile(userId: String, profile: UserProfile)
+
 }

@@ -41,8 +41,9 @@ fun HomeScreen(modifier: Modifier = Modifier,
     var startScreen = currentBottomScreen
     val currentUser = homeViewModel.currentUser
     val isActiveSession = homeViewModel.isAuthenticated()
-    val userEmail = if (isActiveSession) currentUser?.email else ""
-    val userName = if (isActiveSession) currentUser?.displayName else ""
+    val userEmail = currentUser?.email ?: "Unknown"
+    val userName = currentUser?.displayName ?: "User"
+
     val userDestinations = if (!isActiveSession)
         userSignedOutDestinations
     else

@@ -32,6 +32,7 @@ import ie.setu.homefit.ui.components.general.NormalTextComponent
 import ie.setu.homefit.ui.components.general.PasswordTextFieldComponent
 import ie.setu.homefit.ui.components.general.ShowLoader
 import ie.setu.homefit.R
+import ie.setu.homefit.navigation.Profile
 
 @Composable
 fun RegisterScreen(
@@ -120,11 +121,10 @@ fun RegisterScreen(
             }
             is Response.Success -> {
                 LaunchedEffect(Unit) {
-                    navController.navigate(Home.route) {
-                        popUpTo(Register.route) {
-                            inclusive = true
-                        }
+                    navController.navigate(Profile.route) {
+                        popUpTo(Register.route) { inclusive = true }
                     }
+
                 }
             }
         }
