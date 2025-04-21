@@ -2,7 +2,7 @@
     <string name="app_name">HomeFit</string>
     <string name="create_account">Create an Account </string>
     <string name="account_settings">Account Settings</string>
-    <string name="welcome">Welcome Back</string>
+    <string name="welcome">HomeFit</string>
     <string name="first_name">First Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -19,4 +19,6 @@
     <string name="forgot_password">Forgot your password</string>
     <string name="home">Home</string>
     <string name="logout">Logout</string>
+    <string name="dont_have_account_register">No account? register here!</string>
+
 </resources>

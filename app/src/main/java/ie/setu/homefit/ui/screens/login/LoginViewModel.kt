@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
+import dagger.hilt.android.lifecycle.HiltViewModel
 //import dagger.hilt.android.lifecycle.HiltViewModel
 import ie.setu.homefit.data.rules.Validator
 import ie.setu.homefit.firebase.auth.Response
@@ -23,7 +24,7 @@ import timber.log.Timber
 import javax.inject.Inject
 import kotlin.text.Typography.dagger
 
-//@HiltViewModel
+@HiltViewModel
 class LoginViewModel @Inject constructor(
     private val authService: AuthService,
     private val credentialManager: CredentialManager,
