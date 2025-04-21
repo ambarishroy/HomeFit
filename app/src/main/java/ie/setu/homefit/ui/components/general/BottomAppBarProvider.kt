@@ -49,14 +49,22 @@ fun BottomAppBarProvider(
                 icon = { Icon(navigationItem.icon, contentDescription = navigationItem.label) },
                 onClick = {
                     navigationSelectedItem = index
+
+                    val startDestination = runCatching {
+                        navController.graph.findStartDestination().id
+                    }.getOrNull()
+
                     navController.navigate(navigationItem.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+                        if (startDestination != null) {
+                            popUpTo(startDestination) {
+                                saveState = true
+                            }
                         }
                         launchSingleTop = true
                         restoreState = true
                     }
                 }
+
             )
         }
     }

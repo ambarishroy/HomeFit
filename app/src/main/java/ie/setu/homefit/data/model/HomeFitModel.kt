@@ -17,3 +17,10 @@ data class HomeFitModel(
     var latitude: Double = 0.0,
     var longitude: Double = 0.0
 )
+data class UserProfile(
+    val height: Int,
+    val weight: Int,
+    val targetCaloriesPerWeek: Int,
+    val dateOfBirth: String,
+    val email: String
+)

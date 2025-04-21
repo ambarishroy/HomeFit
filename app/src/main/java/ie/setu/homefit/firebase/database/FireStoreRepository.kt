@@ -4,6 +4,7 @@ import android.net.Uri
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.dataObjects
 import com.google.firebase.firestore.toObject
+import ie.setu.homefit.data.model.UserProfile
 import ie.setu.homefit.data.rules.Constants.DONATION_COLLECTION
 import ie.setu.homefit.data.rules.Constants.USER_EMAIL
 import ie.setu.homefit.firebase.services.AuthService
@@ -20,6 +21,9 @@ class FirestoreRepository
 @Inject constructor(private val auth: AuthService,
                     private val firestore: FirebaseFirestore
 ) : FirestoreService {
+    override suspend fun saveUserProfile(userId: String, profile: UserProfile) {
+        firestore.collection("users").document(userId).set(profile).await()
+    }
 
     override suspend fun getAll(email: String): FitList {
         return firestore.collection(DONATION_COLLECTION)

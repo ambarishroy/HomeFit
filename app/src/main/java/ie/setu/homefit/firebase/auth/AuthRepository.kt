@@ -37,7 +37,7 @@ class AuthRepository
         get() = firebaseAuth.currentUser?.email
 
     override val customPhotoUri: Uri?
-        get() = firebaseAuth.currentUser!!.photoUrl
+        get() = firebaseAuth.currentUser?.photoUrl
 
     override suspend fun authenticateUser(email: String, password: String)
             : FirebaseSignInResponse {

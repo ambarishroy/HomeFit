@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ie.setu.homefit.data.model.UserProfile
 import ie.setu.homefit.firebase.services.AuthService
 import ie.setu.homefit.firebase.services.FirestoreService
 import kotlinx.coroutines.launch
@@ -30,4 +31,24 @@ class ProfileViewModel @Inject constructor(
             firestoreService.updatePhotoUris(email,photoUri!!)
         }
     }
+    fun saveUserProfile(
+        height: Int,
+        weight: Int,
+        targetCalories: Int,
+        dob: String
+    ) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val profile = UserProfile(
+            height = height,
+            weight = weight,
+            targetCaloriesPerWeek = targetCalories,
+            dateOfBirth = dob,
+            email = email
+        )
+
+        viewModelScope.launch {
+            firestoreService.saveUserProfile(userId, profile)
+        }
+    }
+
 }
