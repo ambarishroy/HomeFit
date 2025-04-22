@@ -13,6 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import ie.setu.homefit.R
 import ie.setu.homefit.ui.components.general.HeadingTextComponent
 import ie.setu.homefit.ui.components.general.MyTextFieldComponent
@@ -36,6 +38,7 @@ import ie.setu.homefit.ui.theme.HomeFitTheme
 fun ProfileScreen(
     onSignOut: () -> Unit = {},
     profileViewModel: ProfileViewModel = hiltViewModel(),
+    navController: NavController,
 //    loginViewModel: LoginViewModel = hiltViewModel(),
 //    registerViewModel: RegisterViewModel = hiltViewModel()
 ) {
@@ -44,10 +47,21 @@ fun ProfileScreen(
     var weight by remember { mutableStateOf("") }
     var targetCalories by remember { mutableStateOf("") }
     var dob by remember { mutableStateOf("") }
+    val isProfileSaved by profileViewModel.isProfileSaved
+
+    LaunchedEffect(isProfileSaved) {
+        if (isProfileSaved) {
+            navController.navigate("home") {
+                popUpTo("profile") { inclusive = true }
+            }
+        }
+    }
+
     Column(
         Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly
+        verticalArrangement = Arrangement.SpaceEvenly,
+
     ) {
         HeadingTextComponent(value = stringResource(id = R.string.account_settings))
         Spacer(modifier = Modifier.height(10.dp))

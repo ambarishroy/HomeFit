@@ -1,5 +1,7 @@
 package ie.setu.homefit.ui.components.general
 
+import android.util.Log
+import androidx.collection.isNotEmpty
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -27,6 +29,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import ie.setu.homefit.navigation.About
 import ie.setu.homefit.ui.theme.HomeFitTheme
+import timber.log.Timber
+
 @Composable
 fun DropDownMenu(navController: NavController) {
 
@@ -66,7 +70,21 @@ fun DropDownMenu(navController: NavController) {
                 onClick = {
                     selectedOptionText = "Info"
                     expanded = false
-                    navController.navigate(About.route)
+                    Timber.tag("DropDownMenu").d("Trying to navigate to About")
+
+                    val canNavigate = try {
+                        navController.currentDestination != null
+                    } catch (e: IllegalStateException) {
+                        false
+                    }
+
+                    if (canNavigate) {
+                        navController.navigate(About.route)
+                    } else {
+                        Timber.tag("DropDownMenu").w("Navigation graph not ready yet")
+                    }
+
+
                 },
             )
         }

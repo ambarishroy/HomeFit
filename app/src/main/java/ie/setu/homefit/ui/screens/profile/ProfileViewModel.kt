@@ -1,6 +1,7 @@
 package ie.setu.homefit.ui.screens.profile
 
 import android.net.Uri
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +21,8 @@ class ProfileViewModel @Inject constructor(
     val displayName get() = authService.currentUser?.displayName.toString()
     val photoUri get() = authService.customPhotoUri
     val email get() = authService.email.toString()
-
+    var isProfileSaved = mutableStateOf(false)
+        private set
     fun signOut() {
         viewModelScope.launch { authService.signOut() }
     }
@@ -48,7 +50,9 @@ class ProfileViewModel @Inject constructor(
 
         viewModelScope.launch {
             firestoreService.saveUserProfile(userId, profile)
+            isProfileSaved.value = true
         }
     }
+
 
 }

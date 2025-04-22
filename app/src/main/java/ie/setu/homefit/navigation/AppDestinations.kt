@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material.icons.automirrored.filled.Login
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Assessment
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
@@ -38,7 +39,13 @@ object About : AppDestination {
     override val label = "About"
     override val route = "about"
 }
-val bottomAppBarDestinations = listOf(About, Profile)
+object Report : AppDestination{
+    override val icon = Icons.Default.Assessment
+    override val label = "Report"
+    override val route = "report"
+}
+
+val bottomAppBarDestinations = listOf(About, Profile, Report)
 val userSignedOutDestinations = listOf(Login, Register)
 val allDestinations = listOf(
     Home, Login, Register)
