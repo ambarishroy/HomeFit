@@ -1,5 +1,6 @@
 package ie.setu.homefit.ui.components.general
 
+import android.util.Log
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -20,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import ie.setu.homefit.navigation.AppDestination
 import ie.setu.homefit.navigation.bottomAppBarDestinations
 import ie.setu.homefit.ui.theme.HomeFitTheme
+import timber.log.Timber
 
 @Composable
 fun BottomAppBarProvider(
@@ -48,22 +50,35 @@ fun BottomAppBarProvider(
                 label = { Text(text = navigationItem.label) },
                 icon = { Icon(navigationItem.icon, contentDescription = navigationItem.label) },
                 onClick = {
+                    Timber.tag("BottomAppBar").d("Clicked: ${navigationItem.route}")
+
                     navigationSelectedItem = index
 
                     val startDestination = runCatching {
                         navController.graph.findStartDestination().id
                     }.getOrNull()
 
-                    navController.navigate(navigationItem.route) {
-                        if (startDestination != null) {
-                            popUpTo(startDestination) {
-                                saveState = true
+                    val canNavigate = try {
+                        navController.currentDestination != null
+                    } catch (e: IllegalStateException) {
+                        false
+                    }
+                    Timber.tag("BottomAppBar")
+                        .d("canNavigate: $canNavigate, currentRoute: ${navController.currentDestination?.route}")
+                    if (canNavigate) {
+                        Timber.tag("BottomAppBar").d("Navigating to ${navigationItem.route}")
+                        navController.navigate(navigationItem.route) {
+                            if (startDestination != null) {
+                                popUpTo(startDestination) {
+                                    saveState = true
+                                }
                             }
+                            launchSingleTop = true
+                            restoreState = true
                         }
-                        launchSingleTop = true
-                        restoreState = true
                     }
                 }
+
 
             )
         }

@@ -31,12 +31,13 @@ import timber.log.Timber
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier,
                homeViewModel: HomeViewModel = hiltViewModel(),
-               navController: NavHostController = rememberNavController(),
+               navController: NavHostController
 ) {
     val currentNavBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = currentNavBackStackEntry?.destination
     val currentBottomScreen =
-        allDestinations.find { it.route == currentDestination?.route } ?: Login
+        bottomAppBarDestinations.find { it.route == currentDestination?.route } ?: bottomAppBarDestinations.first()
+
 
     var startScreen = currentBottomScreen
     val currentUser = homeViewModel.currentUser
@@ -94,19 +95,12 @@ fun HomeScreen(modifier: Modifier = Modifier,
         }
     )
 }
-@Composable
-fun HomeScreenWrapper() {
-    val viewModel: HomeViewModel = hiltViewModel()
-    val navController = rememberNavController()
-    HomeScreen(
-        homeViewModel = viewModel,
-        navController = navController
-    )
-}
-@Preview(showBackground = true)
-@Composable
-fun MyAppPreview() {
-    HomeFitTheme  {
-        HomeScreen(modifier = Modifier)
-    }
-}
+//@Composable
+//fun HomeScreenWrapper() {
+//    val viewModel: HomeViewModel = hiltViewModel()
+//    val navController = rememberNavController()
+//    HomeScreen(
+//        homeViewModel = viewModel,
+//        navController = navController
+//    )
+//}

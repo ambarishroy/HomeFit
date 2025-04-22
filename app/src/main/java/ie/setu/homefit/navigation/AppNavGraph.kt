@@ -4,13 +4,18 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import ie.setu.homefit.ui.screens.home.HomeScreenWrapper
+import ie.setu.homefit.ui.screens.about.AboutScreen
+import ie.setu.homefit.ui.screens.home.HomeScreen
+import ie.setu.homefit.ui.screens.home.HomeViewModel
 import ie.setu.homefit.ui.screens.login.LoginScreen
 import ie.setu.homefit.ui.screens.profile.ProfileScreen
 import ie.setu.homefit.ui.screens.register.RegisterScreen
+import ie.setu.homefit.ui.screens.report.ReportScreen
+
 //import ie.setu.homefit.ui.screens.home.HomeScreen
 //import ie.setu.homefit.ui.screens.exercise.DailyExerciseScreen
 //import ie.setu.homefit.ui.screens.profile.ProfileScreen
@@ -49,6 +54,7 @@ fun AppNavGraph(
 
         composable(route = Profile.route) {
             ProfileScreen(
+                navController = navController,
                 onSignOut = {
                     navController.navigate(Login.route) {
                         popUpTo(Home.route) { inclusive = true }
@@ -58,7 +64,18 @@ fun AppNavGraph(
         }
 
         composable(route = Home.route) {
-            HomeScreenWrapper()
+            val viewModel: HomeViewModel = hiltViewModel()
+            HomeScreen(
+                homeViewModel = viewModel,
+                navController = navController
+            )
+        }
+
+        composable(route = About.route) {
+            AboutScreen()
+        }
+        composable(route = Report.route) {
+            ReportScreen()
         }
 
 

@@ -42,6 +42,7 @@ fun TopAppBarProvider(
     name: String,
     navigateUp: () -> Unit = {}
 )
+
 {
     TopAppBar(
         title = {
