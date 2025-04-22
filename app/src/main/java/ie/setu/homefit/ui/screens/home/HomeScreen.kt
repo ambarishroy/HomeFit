@@ -78,6 +78,7 @@ fun HomeScreen(modifier: Modifier = Modifier,
             canNavigateBack = navController.previousBackStackEntry != null,
             email = userEmail!!,
             name = userName!!,
+            homeViewModel = homeViewModel,
         ) { navController.navigateUp() }
         },
         content = { paddingValues ->
