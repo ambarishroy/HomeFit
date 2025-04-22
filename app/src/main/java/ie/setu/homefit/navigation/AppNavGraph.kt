@@ -8,11 +8,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ie.setu.homefit.ui.components.general.MainLayout
 import ie.setu.homefit.ui.screens.about.AboutScreen
 import ie.setu.homefit.ui.screens.home.HomeScreen
 import ie.setu.homefit.ui.screens.home.HomeViewModel
 import ie.setu.homefit.ui.screens.login.LoginScreen
 import ie.setu.homefit.ui.screens.profile.ProfileScreen
+import ie.setu.homefit.ui.screens.profile.ProfileViewModel
 import ie.setu.homefit.ui.screens.register.RegisterScreen
 import ie.setu.homefit.ui.screens.report.ReportScreen
 
@@ -53,29 +55,40 @@ fun AppNavGraph(
         }
 
         composable(route = Profile.route) {
-            ProfileScreen(
-                navController = navController,
-                onSignOut = {
-                    navController.navigate(Login.route) {
-                        popUpTo(Home.route) { inclusive = true }
+            val viewModel: ProfileViewModel = hiltViewModel()
+            MainLayout(navController = navController, currentScreen = Profile) {
+                ProfileScreen(
+                    navController = navController,
+                    profileViewModel = viewModel,
+
+                    onSignOut = {
+                        navController.navigate(Login.route) {
+                            popUpTo(Home.route) { inclusive = true }
+                        }
                     }
-                }
-            )
+                )
+            }
         }
 
         composable(route = Home.route) {
             val viewModel: HomeViewModel = hiltViewModel()
-            HomeScreen(
-                homeViewModel = viewModel,
-                navController = navController
-            )
+            MainLayout(navController = navController, currentScreen = Home) {
+                HomeScreen(
+                    homeViewModel = viewModel,
+                    navController = navController
+                )
+            }
         }
 
         composable(route = About.route) {
-            AboutScreen()
+            MainLayout(navController = navController, currentScreen = About) {
+                AboutScreen()
+            }
         }
         composable(route = Report.route) {
-            ReportScreen()
+            MainLayout(navController = navController, currentScreen = Report) {
+                ReportScreen()
+            }
         }
 
 

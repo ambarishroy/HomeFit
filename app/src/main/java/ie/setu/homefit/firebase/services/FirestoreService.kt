@@ -17,5 +17,7 @@ interface FirestoreService {
     suspend fun delete(email: String, donationId: String)
     suspend fun updatePhotoUris(email: String, uri: Uri)
     suspend fun saveUserProfile(userId: String, profile: UserProfile)
+    suspend fun getUserProfile(userId: String): UserProfile?
+
 
 }

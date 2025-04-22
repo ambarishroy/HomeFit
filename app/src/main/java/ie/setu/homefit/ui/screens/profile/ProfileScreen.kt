@@ -43,10 +43,10 @@ fun ProfileScreen(
 //    registerViewModel: RegisterViewModel = hiltViewModel()
 ) {
     var photoUri: Uri? by remember { mutableStateOf(profileViewModel.photoUri) }
-    var height by remember { mutableStateOf("") }
-    var weight by remember { mutableStateOf("") }
-    var targetCalories by remember { mutableStateOf("") }
-    var dob by remember { mutableStateOf("") }
+    val height by profileViewModel.height
+    val weight by profileViewModel.weight
+    val targetCalories by profileViewModel.targetCalories
+    val dob by profileViewModel.dob
     val isProfileSaved by profileViewModel.isProfileSaved
 
     LaunchedEffect(isProfileSaved) {
@@ -54,7 +54,11 @@ fun ProfileScreen(
             navController.navigate("home") {
                 popUpTo("profile") { inclusive = true }
             }
+            profileViewModel.isProfileSaved.value = false
         }
+    }
+    LaunchedEffect(Unit) {
+        profileViewModel.loadUserProfile()
     }
 
     Column(
@@ -80,42 +84,37 @@ fun ProfileScreen(
         )
         TextField(
             value = height,
-            onValueChange = { height = it },
+            onValueChange = { profileViewModel.height.value = it },
             label = { Text("Height (cm)") },
             modifier = Modifier.fillMaxWidth()
         )
 
         TextField(
             value = weight,
-            onValueChange = { weight = it },
+            onValueChange = { profileViewModel.weight.value = it },
             label = { Text("Weight (kg)") },
             modifier = Modifier.fillMaxWidth()
         )
 
         TextField(
             value = targetCalories,
-            onValueChange = { targetCalories = it },
+            onValueChange = { profileViewModel.targetCalories.value = it },
             label = { Text("Target Calories/week") },
             modifier = Modifier.fillMaxWidth()
         )
 
         TextField(
             value = dob,
-            onValueChange = { dob = it },
+            onValueChange = { profileViewModel.dob.value = it },
             label = { Text("Date of Birth") },
             modifier = Modifier.fillMaxWidth()
         )
 
         Button(
             onClick = {
-                profileViewModel.saveUserProfile(
-                    height.toIntOrNull() ?: 0,
-                    weight.toIntOrNull() ?: 0,
-                    targetCalories.toIntOrNull() ?: 0,
-                    dob
-                )
+                profileViewModel.saveUserProfile()
             },
-            colors = ButtonDefaults.buttonColors(
+                    colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.secondary
             ),
         ) {

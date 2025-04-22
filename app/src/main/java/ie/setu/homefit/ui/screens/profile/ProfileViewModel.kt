@@ -16,7 +16,12 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val authService: AuthService,
     private val firestoreService: FirestoreService,
+
 ) : ViewModel() {
+    val height = mutableStateOf("")
+    val weight = mutableStateOf("")
+    val targetCalories = mutableStateOf("")
+    val dob = mutableStateOf("")
 
     val displayName get() = authService.currentUser?.displayName.toString()
     val photoUri get() = authService.customPhotoUri
@@ -33,26 +38,44 @@ class ProfileViewModel @Inject constructor(
             firestoreService.updatePhotoUris(email,photoUri!!)
         }
     }
-    fun saveUserProfile(
-        height: Int,
-        weight: Int,
-        targetCalories: Int,
-        dob: String
-    ) {
+    fun saveUserProfile() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val profile = UserProfile(
-            height = height,
-            weight = weight,
-            targetCaloriesPerWeek = targetCalories,
-            dateOfBirth = dob,
+            height = height.value.toIntOrNull() ?: 0,
+            weight = weight.value.toIntOrNull() ?: 0,
+            targetCaloriesPerWeek = targetCalories.value.toIntOrNull() ?: 0,
+            dateOfBirth = dob.value,
             email = email
         )
 
         viewModelScope.launch {
-            firestoreService.saveUserProfile(userId, profile)
-            isProfileSaved.value = true
+            try {
+                isProfileSaved.value = false
+                firestoreService.saveUserProfile(userId, profile)
+                println("Profile saved, triggering navigation")
+                isProfileSaved.value = true
+            } catch (e: Exception) {
+                println("Failed to save profile: ${e.message}")
+            }
         }
     }
+
+    fun loadUserProfile() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        viewModelScope.launch {
+            val profile = firestoreService.getUserProfile(userId)
+            profile?.let {
+                height.value = it.height.toString()
+                weight.value = it.weight.toString()
+                dob.value = it.dateOfBirth
+                targetCalories.value = it.targetCaloriesPerWeek.toString()
+            }
+        }
+    }
+
+
+
 
 
 }
