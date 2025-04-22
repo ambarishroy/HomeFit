@@ -6,11 +6,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import ie.setu.homefit.navigation.AppDestination
 import ie.setu.homefit.navigation.bottomAppBarDestinations
+import ie.setu.homefit.ui.screens.home.HomeViewModel
 
 @Composable
 fun MainLayout(
     navController: NavHostController,
     currentScreen: AppDestination,
+    homeViewModel: HomeViewModel,
     content: @Composable (PaddingValues) -> Unit
 ) {
     Scaffold(
@@ -21,6 +23,7 @@ fun MainLayout(
                 canNavigateBack = navController.previousBackStackEntry != null,
                 email = "",
                 name = "",
+                homeViewModel = homeViewModel,
                 navigateUp = { navController.navigateUp() }
             )
         },

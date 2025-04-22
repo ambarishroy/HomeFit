@@ -45,7 +45,7 @@ object Report : AppDestination{
     override val route = "report"
 }
 
-val bottomAppBarDestinations = listOf(About, Profile, Report)
+val bottomAppBarDestinations = listOf(Home, Report, Profile)
 val userSignedOutDestinations = listOf(Login, Register)
 val allDestinations = listOf(
     Home, Login, Register)

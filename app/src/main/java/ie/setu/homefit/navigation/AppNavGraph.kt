@@ -56,11 +56,15 @@ fun AppNavGraph(
 
         composable(route = Profile.route) {
             val viewModel: ProfileViewModel = hiltViewModel()
-            MainLayout(navController = navController, currentScreen = Profile) {
+            val homeViewModel: HomeViewModel = hiltViewModel()
+            MainLayout(
+                navController = navController,
+                currentScreen = Profile,
+                homeViewModel = homeViewModel
+            ) {
                 ProfileScreen(
                     navController = navController,
                     profileViewModel = viewModel,
-
                     onSignOut = {
                         navController.navigate(Login.route) {
                             popUpTo(Home.route) { inclusive = true }
@@ -70,9 +74,15 @@ fun AppNavGraph(
             }
         }
 
+
         composable(route = Home.route) {
             val viewModel: HomeViewModel = hiltViewModel()
-            MainLayout(navController = navController, currentScreen = Home) {
+            val homeViewModel: HomeViewModel = hiltViewModel()
+            MainLayout(
+                navController = navController,
+                currentScreen = Home,
+                homeViewModel = homeViewModel
+            )  {
                 HomeScreen(
                     homeViewModel = viewModel,
                     navController = navController
@@ -81,12 +91,22 @@ fun AppNavGraph(
         }
 
         composable(route = About.route) {
-            MainLayout(navController = navController, currentScreen = About) {
+            val homeViewModel: HomeViewModel = hiltViewModel()
+            MainLayout(
+                navController = navController,
+                currentScreen = About,
+                homeViewModel = homeViewModel
+            )  {
                 AboutScreen()
             }
         }
         composable(route = Report.route) {
-            MainLayout(navController = navController, currentScreen = Report) {
+            val homeViewModel: HomeViewModel = hiltViewModel()
+            MainLayout(
+                navController = navController,
+                currentScreen = Report,
+                homeViewModel = homeViewModel
+            ) {
                 ReportScreen()
             }
         }

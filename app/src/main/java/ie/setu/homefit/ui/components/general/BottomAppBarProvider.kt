@@ -65,18 +65,17 @@ fun BottomAppBarProvider(
                     }
                     Timber.tag("BottomAppBar")
                         .d("canNavigate: $canNavigate, currentRoute: ${navController.currentDestination?.route}")
-                    if (canNavigate) {
+                    if (canNavigate && navController.currentDestination?.route != navigationItem.route) {
                         Timber.tag("BottomAppBar").d("Navigating to ${navigationItem.route}")
                         navController.navigate(navigationItem.route) {
-                            if (startDestination != null) {
-                                popUpTo(startDestination) {
-                                    saveState = true
-                                }
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
                             }
                             launchSingleTop = true
                             restoreState = true
                         }
                     }
+
                 }
 
 

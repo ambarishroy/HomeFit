@@ -32,7 +32,8 @@ import ie.setu.homefit.ui.theme.HomeFitTheme
 import timber.log.Timber
 
 @Composable
-fun DropDownMenu(navController: NavController) {
+fun DropDownMenu(navController: NavController,
+                 onLogout: () -> Unit ) {
 
     var expanded by remember { mutableStateOf(false) }
     var selectedOptionText by remember { mutableStateOf("Help") }
@@ -87,14 +88,14 @@ fun DropDownMenu(navController: NavController) {
 
                 },
             )
+            DropdownMenuItem(
+                text = { Text(color = Color.White, text = "Logout", fontSize = 18.sp) },
+                onClick = {
+                    expanded = false
+                    Timber.tag("DropDownMenu").d("User clicked Logout")
+                    onLogout()
+                }
+            )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DropDownMenuPreview() {
-    HomeFitTheme {
-        DropDownMenu(navController = rememberNavController())
     }
 }

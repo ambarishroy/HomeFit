@@ -28,6 +28,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import ie.setu.homefit.navigation.About
 import ie.setu.homefit.navigation.AppDestination
+import ie.setu.homefit.navigation.Login
+import ie.setu.homefit.ui.screens.home.HomeViewModel
 import ie.setu.homefit.ui.theme.HomeFitTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -40,6 +42,7 @@ fun TopAppBarProvider(
     canNavigateBack: Boolean,
     email: String,
     name: String,
+    homeViewModel: HomeViewModel,
     navigateUp: () -> Unit = {}
 )
 
@@ -94,20 +97,32 @@ fun TopAppBarProvider(
                     })
 
         },
-        actions = { DropDownMenu(navController = navController) }
+        actions = {
+            DropDownMenu(
+                navController = navController,
+
+                onLogout = {
+                    homeViewModel.signOut()
+                    navController.navigate(Login.route) {
+                        popUpTo(0)
+                    }
+                }
+            )
+        }
+
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun TopAppBarPreview() {
-    HomeFitTheme  {
-        TopAppBarProvider(
-            navController = rememberNavController(),
-            About,
-            true,
-            email = "roy@gmail.com",
-            name = "userName!!"
-        )
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun TopAppBarPreview() {
+//    HomeFitTheme  {
+//        TopAppBarProvider(
+//            navController = rememberNavController(),
+//            About,
+//            true,
+//            email = "roy@gmail.com",
+//            name = "userName!!",
+//        )
+//    }
+//}
