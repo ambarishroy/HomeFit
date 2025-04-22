@@ -80,4 +80,12 @@ class FirestoreRepository
                 Timber.i("Error $exception")
             }
     }
+    override suspend fun getUserProfile(userId: String): UserProfile? {
+        return firestore.collection("users")
+            .document(userId)
+            .get()
+            .await()
+            .toObject(UserProfile::class.java)
+    }
+
 }

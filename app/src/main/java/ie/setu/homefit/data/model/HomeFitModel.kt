@@ -18,9 +18,10 @@ data class HomeFitModel(
     var longitude: Double = 0.0
 )
 data class UserProfile(
-    val height: Int,
-    val weight: Int,
-    val targetCaloriesPerWeek: Int,
-    val dateOfBirth: String,
-    val email: String
+    var height: Int = 0,
+    var weight: Int = 0,
+    var targetCaloriesPerWeek: Int = 0,
+    var dateOfBirth: String = "",
+    var email: String = ""
 )
+
