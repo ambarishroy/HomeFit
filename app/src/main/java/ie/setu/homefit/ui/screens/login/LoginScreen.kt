@@ -58,6 +58,15 @@ fun LoginScreen(
 
     var isEnabled by remember { mutableStateOf(false) }
     val loginFlow = loginViewModel.loginFlow.collectAsState()
+    val resetPasswordMsg = loginViewModel.resetPasswordMessage.value
+
+    resetPasswordMsg?.let {
+        Text(
+            text = it,
+            color = Color.Red,
+            modifier = Modifier.padding(top = 8.dp)
+        )
+    }
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -73,6 +82,7 @@ fun LoginScreen(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
+                val context = LocalContext.current
                 // NormalTextComponent(value = stringResource(id = R.string.login))
                 HeadingTextComponent(value = stringResource(id = R.string.welcome))
                 Spacer(modifier = Modifier.height(20.dp))
@@ -97,7 +107,24 @@ fun LoginScreen(
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
-                UnderLinedTextComponent(value = stringResource(id = R.string.forgot_password))
+                Text(
+                    text = stringResource(id = R.string.forgot_password),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            loginViewModel.onEvent(LoginUIEvent.ForgotPasswordClicked)
+                            val message = loginViewModel.resetPasswordMessage.value
+                            if (!message.isNullOrBlank()) {
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                            }
+                        },
+                    textAlign = TextAlign.End,
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.primary,
+                    textDecoration = TextDecoration.Underline
+                )
+
+
 
                 Spacer(modifier = Modifier.height(30.dp))
 
@@ -116,7 +143,7 @@ fun LoginScreen(
 
                 // Google Button here
                 Spacer(modifier = Modifier.height(10.dp))
-                val context = LocalContext.current
+               // val context = LocalContext.current
                 GoogleSignInButtonComponent {
                     loginViewModel.signInWithGoogleCredentials(context)
                 }
