@@ -19,4 +19,6 @@ object Constants {
     const val SIGN_IN_WITH_GOOGLE = "Sign in with Google"
     const val SIGN_OUT = "Sign-out"
 
+    const val RC_SIGN_IN = 9001
+
 }

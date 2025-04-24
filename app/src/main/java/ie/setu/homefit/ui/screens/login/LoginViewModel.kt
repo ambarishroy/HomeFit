@@ -112,6 +112,7 @@ class LoginViewModel @Inject constructor(
                 handleSignIn(result)
             } catch (e: GetCredentialException) {
                 // handleFailure(e)
+                Timber.tag("TAG").e(e, "Get credential exception")
             }
         }
     }
