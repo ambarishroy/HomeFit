@@ -34,6 +34,8 @@ class LoginViewModel @Inject constructor(
 
     private val _loginFlow = MutableStateFlow<FirebaseSignInResponse?>(null)
     val loginFlow: StateFlow<FirebaseSignInResponse?> = _loginFlow
+    private val _resetPasswordMessage = mutableStateOf<String?>(null)
+    val resetPasswordMessage = _resetPasswordMessage
 
     var loginUIState = mutableStateOf(LoginUIState())
     var allValidationsPassed = mutableStateOf(false)
@@ -76,6 +78,9 @@ class LoginViewModel @Inject constructor(
             }
 
             is LoginUIEvent.LoginButtonClicked -> { loginUser() }
+            is LoginUIEvent.ForgotPasswordClicked -> {
+                sendResetEmail()
+            }
 
         }
         validateLoginUIDataWithRules()
@@ -135,6 +140,29 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+    private fun sendResetEmail() = viewModelScope.launch {
+        val email = loginUIState.value.email
+
+        if (email.isBlank()) {
+            _resetPasswordMessage.value = "Please enter your email address"
+            return@launch
+        }
+
+        val result = authService.sendPasswordResetEmail(email)
+        when (result) {
+            is Response.Success -> {
+                _resetPasswordMessage.value = "Password reset email sent to $email"
+            }
+            is Response.Failure -> {
+                _resetPasswordMessage.value = "Failed to send email: ${result.e.message}"
+            }
+            is Response.Loading -> {
+                _resetPasswordMessage.value = "Still Loading"
+            }
+        }
+
+    }
+
 }
 
 

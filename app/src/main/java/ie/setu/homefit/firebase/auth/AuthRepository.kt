@@ -124,5 +124,15 @@ class AuthRepository
         }
         return Uri.EMPTY
     }
+    override suspend fun sendPasswordResetEmail(email: String): Response<Boolean> {
+        return try {
+            firebaseAuth.sendPasswordResetEmail(email).await()
+            Response.Success(true)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Response.Failure(e)
+        }
+    }
+
 }
 
