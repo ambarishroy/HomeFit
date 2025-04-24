@@ -56,18 +56,19 @@ object FirebaseModule {
     @Provides
     fun provideFirebaseFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
     @Provides
-    fun provideGetCredentialRequest(): GetCredentialRequest {
-        val googleIdOption = GetGoogleIdOption.Builder()
-            .setFilterByAuthorizedAccounts(false)
-            .setServerClientId("530583143817-37m09na65hs078mmn9t8oevi16vfnloi.apps.googleusercontent.com")
-            .build()
-
+    fun provideGetCredentialRequest(googleIdOption: GetGoogleIdOption): GetCredentialRequest {
         return GetCredentialRequest.Builder()
             .addCredentialOption(googleIdOption)
             .build()
     }
-
-
+    @Provides
+    fun provideGoogleIdOption(@ApplicationContext context: Context): GetGoogleIdOption {
+        return GetGoogleIdOption.Builder()
+            .setFilterByAuthorizedAccounts(false)
+            .setServerClientId(context.getString(R.string.web_client_id))
+            .setAutoSelectEnabled(true)
+            .build()
+    }
 
 }
 

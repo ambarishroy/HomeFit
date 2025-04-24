@@ -11,7 +11,7 @@ class HomeFitApp:Application(){
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        Timber.i("Starting DonationX Application")
+        Timber.i("Starting Homefit Application")
         Firebase.initialize(context = this)
     }
 }
