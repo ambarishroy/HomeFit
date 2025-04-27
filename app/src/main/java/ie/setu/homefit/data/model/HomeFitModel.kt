@@ -24,4 +24,14 @@ data class UserProfile(
     var dateOfBirth: String = "",
     var email: String = ""
 )
+data class Exercise(
+    val id: Int,
+    val name: String,
+    val imageResId: Int,
+    val description: String
+)
+data class ExerciseInfo(
+    val imageRes: Int,
+    val instructions: String
+)
 

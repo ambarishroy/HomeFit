@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ie.setu.homefit.ui.components.general.MainLayout
 import ie.setu.homefit.ui.screens.about.AboutScreen
+import ie.setu.homefit.ui.screens.exercise.ExerciseScreen
 import ie.setu.homefit.ui.screens.home.HomeScreen
 import ie.setu.homefit.ui.screens.home.HomeViewModel
 import ie.setu.homefit.ui.screens.login.LoginScreen
@@ -110,6 +111,21 @@ fun AppNavGraph(
                 ReportScreen()
             }
         }
+        composable(
+            route = "exercise/{exerciseName}"
+        ) { backStackEntry ->
+            val exerciseName = backStackEntry.arguments?.getString("exerciseName")
+            val homeViewModel: HomeViewModel = hiltViewModel()
+            MainLayout(
+                navController = navController,
+                currentScreen = Exercise,
+                homeViewModel = homeViewModel
+            ) {
+                ExerciseScreen(exerciseName = exerciseName ?: "Unknown Exercise")
+            }
+        }
+
+
 
 
     }

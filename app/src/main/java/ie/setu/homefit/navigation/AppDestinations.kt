@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material.icons.automirrored.filled.Login
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Assessment
+import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
@@ -43,6 +44,11 @@ object Report : AppDestination{
     override val icon = Icons.Default.Assessment
     override val label = "Report"
     override val route = "report"
+}
+object Exercise : AppDestination{
+    override val icon = Icons.Default.FitnessCenter
+    override val label = "Exercise"
+    override val route = "exercise/{exerciseName}"
 }
 
 val bottomAppBarDestinations = listOf(Home, Report, Profile)
