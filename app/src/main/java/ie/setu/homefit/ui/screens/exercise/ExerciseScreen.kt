@@ -22,7 +22,7 @@ fun ExerciseScreen(
     val caloriesBurned by viewModel.caloriesBurned.collectAsState()
 
     val exerciseInfo = viewModel.getExerciseInfo(exerciseName)
-
+//
     Column(
         modifier = Modifier
             .fillMaxSize()
