@@ -22,7 +22,8 @@ data class UserProfile(
     var weight: Int = 0,
     var targetCaloriesPerWeek: Int = 0,
     var dateOfBirth: String = "",
-    var email: String = ""
+    var email: String = "",
+    val caloriesBurned: Int = 0
 )
 data class Exercise(
     val id: Int,

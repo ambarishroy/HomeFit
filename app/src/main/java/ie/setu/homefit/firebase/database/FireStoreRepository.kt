@@ -87,5 +87,12 @@ class FirestoreRepository
             .await()
             .toObject(UserProfile::class.java)
     }
+    override suspend fun saveCalories(userId: String, calories: Int) {
+        firestore.collection("users")
+            .document(userId)
+            .update("caloriesBurned", calories)
+            .await()
+    }
+
 
 }

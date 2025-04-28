@@ -22,13 +22,12 @@ fun ExerciseScreen(
     val caloriesBurned by viewModel.caloriesBurned.collectAsState()
 
     val exerciseInfo = viewModel.getExerciseInfo(exerciseName)
-//
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Exercise Image
+
         Image(
             painter = painterResource(id = exerciseInfo.imageRes),
             contentDescription = exerciseName,
@@ -39,7 +38,7 @@ fun ExerciseScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Exercise Instructions
+
         Text(
             text = exerciseInfo.instructions,
             style = MaterialTheme.typography.bodyLarge
@@ -47,13 +46,13 @@ fun ExerciseScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Timer
+
         Text(
             text = "Timer: ${timerState} sec",
             style = MaterialTheme.typography.headlineSmall
         )
 
-        // Calories
+
         Text(
             text = "Calories Burned: $caloriesBurned kcal",
             style = MaterialTheme.typography.headlineSmall
@@ -61,19 +60,19 @@ fun ExerciseScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Start Button
+
         Button(
             onClick = { viewModel.startExercise() },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Start Exercise")
+            Text("Start")
         }
-        // Stop Button
+
         Button(
             onClick = { viewModel.stopExercise() },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Stop Exercise")
+            Text("Stop")
         }
     }
 }
