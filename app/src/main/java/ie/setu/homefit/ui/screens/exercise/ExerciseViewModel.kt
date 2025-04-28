@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ie.setu.homefit.R
 import ie.setu.homefit.data.model.ExerciseInfo
+import ie.setu.homefit.firebase.services.AuthService
+import ie.setu.homefit.firebase.services.FirestoreService
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +15,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ExerciseViewModel @Inject constructor() : ViewModel() {
+class ExerciseViewModel @Inject constructor(
+    private val authService: AuthService,
+    private val firestoreService: FirestoreService
+) : ViewModel() {
 
     private val _timerState = MutableStateFlow(0)
     val timerState: StateFlow<Int> = _timerState
@@ -30,6 +35,7 @@ class ExerciseViewModel @Inject constructor() : ViewModel() {
                 delay(1000L)
                 _timerState.value += 1
                 _caloriesBurned.value = (_timerState.value / 6)
+                saveCalories()
             }
         }
     }
@@ -52,6 +58,14 @@ class ExerciseViewModel @Inject constructor() : ViewModel() {
                 imageRes = R.drawable.aboutus_homer,
                 instructions = "Follow correct form and pace yourself."
             )
+        }
+    }
+    private fun saveCalories() {
+        val userId = authService.currentUser?.uid ?: return
+        val calories = _caloriesBurned.value
+
+        viewModelScope.launch {
+            firestoreService.saveCalories(userId, calories)
         }
     }
 }

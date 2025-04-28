@@ -1,51 +1,88 @@
 package ie.setu.homefit.ui.screens.report
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import ie.setu.homefit.R
-import ie.setu.homefit.ui.components.general.Centre
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun ReportScreen(modifier: Modifier = Modifier) {
+fun ReportScreen(
+    reportViewModel: ReportViewModel = hiltViewModel()
+) {
+    LaunchedEffect(Unit) {
+        reportViewModel.loadUserProfile()
+    }
+    val height = reportViewModel.height.value
+    val weight = reportViewModel.weight.value
+    val targetCalories = reportViewModel.targetCalories.value
+    val caloriesBurned = reportViewModel.caloriesBurned.value
+    val bmi = reportViewModel.bmi.value
 
     Column(
-        modifier = modifier.background(MaterialTheme.colorScheme.secondary),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top
     ) {
-        Centre(
-            Modifier
-            .fillMaxWidth()
-            .padding(top = 48.dp,)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.aboutus_homer),
-                contentDescription = "homer image",
-                modifier = Modifier.size(350.dp)
-            )
-        }
-        Centre(Modifier.fillMaxSize()) {
-            Text(color = Color.White,
-                fontWeight = FontWeight.Bold,
-                fontSize = 30.sp,
-                lineHeight = 34.sp,
-                textAlign = TextAlign.Center,
-                text = stringResource(R.string.about_message)
-            )
-        }
+        Text(
+            text = "Your Health Report",
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "Height: $height cm",
+            style = MaterialTheme.typography.bodyLarge
+        )
+        Text(
+            text = "Weight: $weight kg",
+            style = MaterialTheme.typography.bodyLarge
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "Your BMI: ${String.format("%.2f", bmi)}",
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.secondary
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        Text(
+            text = "Calories Burned This Week",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Progress Bar
+        val target = targetCalories.toIntOrNull() ?: 1
+        val progress = (caloriesBurned.toFloat() / target).coerceIn(0f, 1f)
+
+        LinearProgressIndicator(
+            progress = { progress },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(12.dp),
+            color = MaterialTheme.colorScheme.primary,
+            trackColor = MaterialTheme.colorScheme.surfaceVariant,
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = "$caloriesBurned / $targetCalories kcal",
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }
