@@ -67,27 +67,30 @@ fun HomeScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
+                    .padding(paddingValues)
+                    .padding(8.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Welcome to HomeFit, $userName!",
+                    text = "Hi $userName!",
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     color = Color.Blue
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = motivationalQuote,
                     style = MaterialTheme.typography.titleMedium,
                     color = Color.Gray
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 LazyColumn {
                     items(exercises) { exercise ->
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(100.dp)
+                                .height(90.dp)
                                 .padding(vertical = 8.dp)
                                 .clickable {
                                     navController.navigate("exercise/$exercise")
