@@ -24,10 +24,10 @@ fun ProfileContent(
     email: String
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth().padding(4.dp),
+        modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(
+       Spacer(
             modifier = Modifier.height(10.dp)
         )
         AsyncImage(
@@ -37,14 +37,14 @@ fun ProfileContent(
                 .build(),
             contentDescription = null,
             contentScale = Crop,
-            modifier = Modifier.clip(CircleShape).width(180.dp).height(180.dp)
+            modifier = Modifier.clip(CircleShape).width(120.dp).height(120.dp)
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = displayName,
             fontSize = 24.sp
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = email,
             fontSize = 18.sp,
