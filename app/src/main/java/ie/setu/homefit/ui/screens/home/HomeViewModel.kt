@@ -16,7 +16,7 @@ class HomeViewModel @Inject constructor(
     private val authService: AuthService,
 ) : ViewModel() {
 
-    private val _exercises = MutableStateFlow(listOf("Push Ups", "Squats", "Lunges", "Plank", "Burpees", "Mountain Climbers", "Sit Ups"))
+    private val _exercises = MutableStateFlow(listOf("Push Ups", "Squats", "Lunges", "Plank", "Burpees", "Jumping Jacks", "Sit Ups"))
     val exercises: StateFlow<List<String>> = _exercises.asStateFlow()
 
     private val _name = MutableStateFlow("User")
