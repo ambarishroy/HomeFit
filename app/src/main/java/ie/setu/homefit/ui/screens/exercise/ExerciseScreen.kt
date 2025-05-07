@@ -31,6 +31,7 @@ fun ExerciseScreen(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = exerciseName,
             style = MaterialTheme.typography.headlineLarge,
@@ -50,7 +51,7 @@ fun ExerciseScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(top = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
