@@ -92,7 +92,7 @@ fun HomeScreen(
                                 .clickable {
                                     navController.navigate("exercise/$exercise")
                                 },
-                            colors = CardDefaults.cardColors(containerColor = Color(0xFFe0f7fa)),
+                            colors = CardDefaults.cardColors(containerColor = Color(0xFFBBDEFB)),
                             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
                             shape = MaterialTheme.shapes.medium
                         ) {
