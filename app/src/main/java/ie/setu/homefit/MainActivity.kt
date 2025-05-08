@@ -15,7 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ie.setu.homefit.navigation.AppNavGraph
 import ie.setu.homefit.ui.theme.HomeFitTheme
-
+//develop branch
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
