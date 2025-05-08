@@ -20,6 +20,7 @@ APIs used
 4. Hilt: Hilt is used for dependency injection to manage the lifecycle of the components.
 
 Architecture and UX/DX
+
 The app follows the Model-View-ViewModel (MVVM) architecture, enhancing modularity and testability. ViewModels interact with the repository layer to fetch and update data and feed it to the UI. In terms of traditional, jetpack compose or hybrid, HomeFit employs a hybrid approach, utilizing both traditional XML-based layouts and Jetpack Compose for specific interactive UI components. For stability and ease of navigation, persistent bottom navigation bar is implemented by traditional XML. The profile setup form is also based on XML layouts.The exercise cards and dynamic components utilize Jetpack Compose for a more fluid and interactive experience.
 
 Personal Statement
