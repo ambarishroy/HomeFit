@@ -20,12 +20,15 @@ HomeFit is an Android application designed to help users maintain a healthy life
 4. Hilt: Hilt is used for dependency injection to manage the lifecycle of the components.
 
 **Architecture and UX/DX:**
+
 The app follows the Model-View-ViewModel (MVVM) architecture, enhancing modularity and testability. ViewModels interact with the repository layer to fetch and update data and feed it to the UI. In terms of traditional, jetpack compose or hybrid, HomeFit employs a hybrid approach, utilizing both traditional XML-based layouts and Jetpack Compose for specific interactive UI components. For stability and ease of navigation, persistent bottom navigation bar is implemented by traditional XML. The profile setup form is also based on XML layouts.The exercise cards and dynamic components utilize Jetpack Compose for a more fluid and interactive experience.
 
 **Personal Statement:**
+
 Building HomeFit has been an enriching experience that allowed me to integrate Android development best practices with modern libraries such as Jetpack Compose and Hilt. Overcoming challenges related to dependency management and UI consistency provided crucial and valuable lessons. Through this project, I have gained hands-on experience with Firebase Authentication and cloud data management using Firestore and Google API.
 
 **References:**
+
 1. https://developer.android.com/studio/write/firebase
 2. https://developer.android.com/identity/sign-in/credential-manager-siwg
 3. https://developer.android.com/training/dependency-injection/hilt-jetpack
